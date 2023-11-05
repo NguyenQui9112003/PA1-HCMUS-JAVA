@@ -3,13 +3,12 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.table.*;
-public class searchPage extends JFrame implements ActionListener {
+public class searchDefPage extends JFrame implements ActionListener {
     private JTextField inputField;
     private JTable listTable;
     private JButton searchButton;
     private JButton backButton;
-    private javax.swing.JLabel title;
-    public searchPage () {
+    public searchDefPage () {
         setTitle("SLANG WORD");
         setSize(640, 360);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -20,7 +19,7 @@ public class searchPage extends JFrame implements ActionListener {
     }
     public JPanel createAndShowGUI() {
         Color color = new Color(255,0,0);
-        title = new JLabel("Search by Slang Word", JLabel.CENTER);
+        JLabel title = new JLabel("Search by Definition", JLabel.CENTER);
         title.setFont(new Font("Serif", Font.PLAIN, 28));
         title.setForeground(color);
         title.setBounds(50, 50, 500, 30);
@@ -58,7 +57,7 @@ public class searchPage extends JFrame implements ActionListener {
         searchButton.addActionListener(this);
         content.add(searchButton, gbc);
 
-        String[] columnNames = {"NO.", "Definition"};
+        String[] columnNames = {"Slang", "Definition"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 15);
         model.setColumnIdentifiers(columnNames);
         listTable = new JTable(model);
@@ -94,17 +93,18 @@ public class searchPage extends JFrame implements ActionListener {
             if(inputString.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Enter string to search");
             } else {
-                ArrayList<String> res = (ArrayList<String>) Main.listOfSlang.searchSlangWord(inputString);
+                ArrayList<String> res = (ArrayList<String>) Main.listOfSlang.searchDefinition(inputString);
                 if (res == null) {
                     JOptionPane.showMessageDialog(null, "Word definition don't exist");
                 } else {
                     DefaultTableModel model = (DefaultTableModel) listTable.getModel();
                     model.setRowCount(0);
-                    for (int i = 0; i < res.size(); i++) {
-                        model.addRow(new Object[]{i + 1, res.get(i)});
+                    for (String re : res) {
+                        model.addRow(new Object[]{re, Main.listOfSlang.getDefinitionString(re)});
                     }
                 }
             }
         }
     }
 }
+

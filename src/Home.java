@@ -55,18 +55,22 @@ public class Home extends JFrame implements ActionListener {
         panel.add(addButton);panel.add(updateButton);panel.add(deleteButton);panel.add(resetButton);
         panel.add(randomButton);panel.add(quizButton);panel.add(quizDefButton);
         searchButton.addActionListener(this);
+        searchDefButton.addActionListener(this);
         return panel;
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(searchButton)) {
-            System.out.println("SearchPage");
-            searchPage search = new searchPage();
-            search.setVisible(true);
+            searchPage page = new searchPage();
+            page.setVisible(true);
+            this.setVisible(false);
+        } else if (e.getSource().equals(searchDefButton)) {
+            searchDefPage page = new searchDefPage();
+            page.setVisible(true);
             this.setVisible(false);
         }
     }
     public static void main(String[] args) {
-        Home myMenu = new Home();
+        Home myHome = new Home();
     }
 }
