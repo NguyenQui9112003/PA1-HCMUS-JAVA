@@ -17,32 +17,37 @@ public class FileManager {
         } else if (choose == 2){
             file = new File(RAW_DATA_DIR);
         }
-
         if(file != null && file.exists()){
-            SlangWordList slangWordList = new SlangWordList();
+            SlangWordList listOfSlang = new SlangWordList();
             try{
                 BufferedReader br = new BufferedReader(new FileReader(file));
-                String line = "";
-                while((line = br.readLine()) != null){
-                    String[] slang = line.split("`");
-                    String[] listDefinition = slang[1].split("\\|");
-                    List<String> definition = new ArrayList<>();
-                    for(String s : listDefinition){
-                        definition.add(s);
+                String w;
+                while((w = br.readLine()) != null){
+                    String[] wordAndDef = w.split("`");
+                    if (wordAndDef.length == 2){
+                        String[] listDef = wordAndDef[1].split("\\|");
+                        List<String> def = new ArrayList<>(Arrays.asList(listDef));
+                        listOfSlang.addSlangWord(new SlangWord(wordAndDef[0], def));
                     }
-                    slangWordList.addSlangWord(new SlangWord(slang[0], definition));
                 }
                 br.close();
-
             }catch (IOException e){
                 System.out.println("Error: " + e.getMessage());
             }
             System.out.println("File exists");
-            return slangWordList;
+            return listOfSlang;
         }
         else{
             System.out.println("File not exists");
             return null;
         }
+    }
+    public static void resetDictionary(){
+        File f = new File(DATA_DIR);
+        if(f.exists()){
+            f.delete();
+        }
+        loadFile(2);
+        System.out.println("Reset success");
     }
 }

@@ -4,7 +4,6 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class Home extends JFrame implements ActionListener {
-    private javax.swing.JLabel title;
     private javax.swing.JButton searchButton;
     private javax.swing.JButton searchDefButton;
     private javax.swing.JButton historyButton;
@@ -28,7 +27,7 @@ public class Home extends JFrame implements ActionListener {
 
     public JPanel createAndShowGUI() {
         Color color = new Color(255,0,0);
-        title = new JLabel("SLANG WORD", JLabel.CENTER);
+        JLabel title = new JLabel("SLANG WORD", JLabel.CENTER);
         title.setFont(new Font("Serif", Font.PLAIN, 28));
         title.setForeground(color);
         title.setBounds(50, 50, 500, 30);
@@ -56,6 +55,7 @@ public class Home extends JFrame implements ActionListener {
         panel.add(randomButton);panel.add(quizButton);panel.add(quizDefButton);
         searchButton.addActionListener(this);
         searchDefButton.addActionListener(this);
+        resetButton.addActionListener(this);
         return panel;
     }
     @Override
@@ -68,9 +68,8 @@ public class Home extends JFrame implements ActionListener {
             searchDefPage page = new searchDefPage();
             page.setVisible(true);
             this.setVisible(false);
+        } else if (e.getSource().equals(resetButton)) {
+            FileManager.resetDictionary();
         }
-    }
-    public static void main(String[] args) {
-        Home myHome = new Home();
     }
 }
