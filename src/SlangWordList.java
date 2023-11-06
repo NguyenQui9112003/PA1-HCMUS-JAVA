@@ -45,6 +45,9 @@ public class SlangWordList {
         }
         return result.toString();
     }
+    public void addSlangWord(String slangWord, List<String> definition){
+        this.listOfSlang.put(slangWord, definition);
+    }
     public void addSlangWord(SlangWord slangWord){
         this.listOfSlang.put(slangWord.getsWord(), slangWord.getDef());
     }

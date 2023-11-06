@@ -3211,6 +3211,7 @@ G2G2B`Got To Go To Bed
 GMT`Greenwich Mean Time
 GMV`Got My Vote
 GMY`Good Man Yourself
+quihuhong`quihuhong
 IMING`Instant Messaging
 WNDITWB`We Never Did It This Way Before
 GND`Girl Next Door
@@ -4294,6 +4295,7 @@ JFT`Just For Today
 :'(`Crying
 :')`Crying with joy
 JFY`Just For You
+wibu123`wibu123
 JGB`Just Got Back
 JGH`Just Got Home
 ESKI`Type of urban music
@@ -6668,6 +6670,7 @@ MIXOLOGY`Study of mixing drinks
 PTE`Private
 PTI`Pardon The Interruption
 SMGDH`Shaking My God Damn Head
+qui`wibu
 PTM`Please Tell Me
 PEACE`Goodbye
 PTL`Praise The Lord
@@ -7638,4 +7641,3 @@ BAU`Business As Usual
 SCH`School
 BAY`Baby
 SCO`San Fransisco
-qui`wibu

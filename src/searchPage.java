@@ -1,8 +1,11 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.table.*;
+import java.util.List;
 public class searchPage extends JFrame implements ActionListener {
     private JTextField inputField;
     private JTable listTable;
@@ -90,17 +93,31 @@ public class searchPage extends JFrame implements ActionListener {
         }
         if(e.getSource() == searchButton) {
             String inputString = inputField.getText();
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss a");
+            LocalDateTime now = LocalDateTime.now();
+            String time = dtf.format(now);
+
             if(inputString.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Enter string to search");
             } else {
-                ArrayList<String> res = (ArrayList<String>) Main.listOfSlang.searchSlangWord(inputString);
-                if (res == null) {
+                ArrayList<String> def = (ArrayList<String>) Main.listOfSlang.searchSlangWord(inputString);
+                if (def == null) {
                     JOptionPane.showMessageDialog(null, "Word definition don't exist");
+                    History historyList = new History(time, "NOT FOUND", "NOT FOUND", inputString);
+                    FileManager.saveHistory(historyList);
                 } else {
+                    String res = "";
+                    for (String s : def) {
+                        res += s + ", ";
+                    }
+                    History historyList = new History(time, inputString, res, inputString);
+                    FileManager.saveHistory(historyList);
+
                     DefaultTableModel model = (DefaultTableModel) listTable.getModel();
                     model.setRowCount(0);
-                    for (int i = 0; i < res.size(); i++) {
-                        model.addRow(new Object[]{i + 1, res.get(i)});
+                    for (int i = 0; i < def.size(); i++) {
+                        model.addRow(new Object[]{i + 1, def.get(i)});
                     }
                 }
             }

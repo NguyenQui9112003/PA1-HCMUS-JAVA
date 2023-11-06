@@ -43,7 +43,7 @@ public class FileManager {
         }
     }
     public static void saveHistory(History historySearch){
-        File file = new File("history.txt");
+        File file = new File(HISTORY);
         BufferedWriter bw = null;
         try{
             if(!file.exists()){
@@ -61,6 +61,34 @@ public class FileManager {
             }catch (IOException e){
                 System.out.println("Error: " + e.getMessage());
             }
+        }
+    }
+    public static void saveFile()
+    {
+        File file = new File(DATA_DIR);
+        Iterator<Map.Entry<String, List<String>>> iterator = Main.listOfSlang.getListOfSlang().entrySet().iterator();
+        System.out.println("Save file");
+        try{
+            if(!file.exists()){
+                file.createNewFile();
+            }
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+            while (iterator.hasNext()){
+                Map.Entry<String, List<String>> entry = iterator.next();
+                String slang = entry.getKey();
+                List<String> definition = entry.getValue();
+                String line = slang + "`";
+                for(String s : definition){
+                    line += s + "|";
+                }
+                line = line.substring(0, line.length() - 1);
+                bw.write(line);
+                bw.newLine();
+            }
+            System.out.println("Save file successfully");
+            bw.close();
+        }catch (IOException e){
+            System.out.println("Error: " + e.getMessage());
         }
     }
     public static void loadHistory(){

@@ -106,7 +106,7 @@ public class searchDefPage extends JFrame implements ActionListener {
                     FileManager.saveHistory(historyList);
                     JOptionPane.showMessageDialog(null, "Word definition don't exist");
                 } else {
-                    History historyList = new History(time, Main.listOfSlang.getSlangWordList(res), "", inputString);
+                    History historyList = new History(time, Main.listOfSlang.getSlangWordList(res), inputString, inputString);
                     FileManager.saveHistory(historyList);
                     DefaultTableModel model = (DefaultTableModel) listTable.getModel();
                     model.setRowCount(0);
