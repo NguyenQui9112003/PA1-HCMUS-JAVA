@@ -8,7 +8,6 @@ public class searchPage extends JFrame implements ActionListener {
     private JTable listTable;
     private JButton searchButton;
     private JButton backButton;
-    private javax.swing.JLabel title;
     public searchPage () {
         setTitle("SLANG WORD");
         setSize(640, 360);
@@ -20,7 +19,7 @@ public class searchPage extends JFrame implements ActionListener {
     }
     public JPanel createAndShowGUI() {
         Color color = new Color(255,0,0);
-        title = new JLabel("Search by Slang Word", JLabel.CENTER);
+        JLabel title = new JLabel("Search by Slang Word", JLabel.CENTER);
         title.setFont(new Font("Serif", Font.PLAIN, 28));
         title.setForeground(color);
         title.setBounds(50, 50, 500, 30);

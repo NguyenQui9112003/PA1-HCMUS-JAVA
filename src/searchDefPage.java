@@ -3,6 +3,8 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.table.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 public class searchDefPage extends JFrame implements ActionListener {
     private JTextField inputField;
     private JTable listTable;
@@ -90,13 +92,22 @@ public class searchDefPage extends JFrame implements ActionListener {
         }
         if(e.getSource() == searchButton) {
             String inputString = inputField.getText();
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss a");
+            LocalDateTime now = LocalDateTime.now();
+            String time = dtf.format(now);
+
             if(inputString.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Enter string to search");
             } else {
                 ArrayList<String> res = (ArrayList<String>) Main.listOfSlang.searchDefinition(inputString);
                 if (res == null) {
+                    History historyList = new History(time, "NOT FOUND", "NOT FOUND", inputString);
+                    FileManager.saveHistory(historyList);
                     JOptionPane.showMessageDialog(null, "Word definition don't exist");
                 } else {
+                    History historyList = new History(time, Main.listOfSlang.getSlangWordList(res), "", inputString);
+                    FileManager.saveHistory(historyList);
                     DefaultTableModel model = (DefaultTableModel) listTable.getModel();
                     model.setRowCount(0);
                     for (String re : res) {

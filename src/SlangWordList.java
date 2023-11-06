@@ -38,6 +38,13 @@ public class SlangWordList {
         }
         return res.toString();
     }
+    public String getSlangWordList(ArrayList<String> slangWordList) {
+        StringBuilder result = new StringBuilder();
+        for (String slangWord : slangWordList) {
+            result.append(slangWord).append(", ");
+        }
+        return result.toString();
+    }
     public void addSlangWord(SlangWord slangWord){
         this.listOfSlang.put(slangWord.getsWord(), slangWord.getDef());
     }

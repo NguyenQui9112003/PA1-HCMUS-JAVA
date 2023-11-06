@@ -11,13 +11,11 @@ public class FileManager {
             File newFile = new File(DATA_DIR);
             if(newFile.exists()){
                 file = newFile;
-                System.out.println("1");
             }else{
                 file = new File(RAW_DATA_DIR);
             }
         } else if (choose == 2){
             file = new File(RAW_DATA_DIR);
-            System.out.println("2");
         }
         if(file != null && file.exists()){
             SlangWordList listOfSlang = new SlangWordList();
@@ -44,8 +42,53 @@ public class FileManager {
             return null;
         }
     }
+    public static void saveHistory(History historySearch){
+        File file = new File("history.txt");
+        BufferedWriter bw = null;
+        try{
+            if(!file.exists()){
+                file.createNewFile();
+            }
+            bw = new BufferedWriter(new FileWriter(file, true));
+            bw.write(historySearch.getTime() + "`" + historySearch.getSlang() + "`" + historySearch.getDef() + "`" + historySearch.getKeyword());
+            bw.newLine();
+        }catch (IOException e){
+            System.out.println("Error: " + e.getMessage());
+        }finally {
+            try{
+                assert bw != null;
+                bw.close();
+            }catch (IOException e){
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+    }
+    public static void loadHistory(){
+        Main.historyList = new ArrayList<>();
+        BufferedReader br = null;
+        try{
+            br = new BufferedReader(new FileReader(new File("history.txt")));
+            String line = "";
+            while((line = br.readLine()) != null){
+                String[] history = line.split("`");
+                History historySearch = new History(history[0], history[1], history[2], history[3]);
+                Main.historyList.add(historySearch);
+            }
+            br.close();
+        }catch (IOException e){
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
     public static void resetDictionary(){
         Main.listOfSlang = Main.listRawOfSlang;
         System.out.println("Reset success");
+    }
+    public static void resetHistory(){
+        File file = new File("history.txt");
+        if(file.exists()){
+            file.delete();
+        }
+        System.out.println("Reset history successfully");
     }
 }
