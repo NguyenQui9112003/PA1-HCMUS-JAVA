@@ -11,11 +11,13 @@ public class FileManager {
             File newFile = new File(DATA_DIR);
             if(newFile.exists()){
                 file = newFile;
+                System.out.println("1");
             }else{
                 file = new File(RAW_DATA_DIR);
             }
         } else if (choose == 2){
             file = new File(RAW_DATA_DIR);
+            System.out.println("2");
         }
         if(file != null && file.exists()){
             SlangWordList listOfSlang = new SlangWordList();
@@ -43,11 +45,7 @@ public class FileManager {
         }
     }
     public static void resetDictionary(){
-        File f = new File(DATA_DIR);
-        if(f.exists()){
-            f.delete();
-        }
-        loadFile(2);
+        Main.listOfSlang = Main.listRawOfSlang;
         System.out.println("Reset success");
     }
 }
