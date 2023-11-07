@@ -27,7 +27,7 @@ public class FileManager {
                     if (wordAndDef.length == 2){
                         String[] listDef = wordAndDef[1].split("\\|");
                         List<String> def = new ArrayList<>(Arrays.asList(listDef));
-                        listOfSlang.addSlangWord(new SlangWord(wordAndDef[0], def));
+                        listOfSlang.addBySlang(new SlangWord(wordAndDef[0], def));
                     }
                 }
                 br.close();

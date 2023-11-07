@@ -100,9 +100,11 @@ public class addPage extends JFrame implements ActionListener {
             }
             ArrayList<String> result = (ArrayList<String>) Main.listOfSlang.searchSlangWord(slang);
             if(result == null){
-                Main.listOfSlang.addSlangWord(slang, definition);
+                Main.listOfSlang.addBySlangAndDef(slang, definition);
                 FileManager.saveFile();
                 JOptionPane.showMessageDialog(null, "Add successfully", "Notification", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                new alertScreen(slang, definition);
             }
         }
     }

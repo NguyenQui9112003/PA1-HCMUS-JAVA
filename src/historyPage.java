@@ -108,6 +108,8 @@ public class historyPage extends JFrame implements ActionListener{
             FileManager.resetHistory();
             JOptionPane.showMessageDialog(null,
                     "Reset successfully", "Notification", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+            new historyPage();
         }
     }
 }
