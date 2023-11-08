@@ -63,6 +63,9 @@ public class SlangWordList {
     public void addBySlangAndDef(String slangWord, List<String> definition) {
         this.listOfSlang.put(slangWord, definition);
     }
+    public void deleteSlangWord(String slang){
+        this.listOfSlang.remove(slang);
+    }
 
     public void addBySlang(SlangWord slangWord) {
         this.listOfSlang.put(slangWord.getsWord(), slangWord.getDef());
@@ -71,7 +74,6 @@ public class SlangWordList {
     public void overwriteSlangWord(String slang, List<String> definition) {
         this.listOfSlang.replace(slang, definition);
     }
-
     public void duplicateSlangWord(String slang, List<String> definition) {
         List<String> def = this.listOfSlang.get(slang);
         def.addAll(definition);

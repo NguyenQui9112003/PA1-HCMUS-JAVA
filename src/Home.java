@@ -57,7 +57,9 @@ public class Home extends JFrame implements ActionListener {
         searchDefButton.addActionListener(this);
         historyButton.addActionListener(this);
         addButton.addActionListener(this);
+        updateButton.addActionListener(this);
         resetButton.addActionListener(this);
+        deleteButton.addActionListener(this);
         return panel;
     }
     @Override
@@ -76,6 +78,14 @@ public class Home extends JFrame implements ActionListener {
             this.setVisible(false);
         } else if (e.getSource().equals(addButton)) {
             addPage page = new addPage();
+            page.setVisible(true);
+            this.setVisible(false);
+        } else if (e.getSource().equals(updateButton)) {
+            editPage page = new editPage();
+            page.setVisible(true);
+            this.setVisible(false);
+        } else if (e.getSource().equals(deleteButton)) {
+            deletePage page = new deletePage();
             page.setVisible(true);
             this.setVisible(false);
         } else if (e.getSource().equals(resetButton)) {
