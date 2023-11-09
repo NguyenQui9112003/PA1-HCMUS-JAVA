@@ -1,6 +1,7 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.IOException;
 import javax.swing.table.*;
 public class historyPage extends JFrame implements ActionListener{
     private JTable historyTable;
@@ -107,7 +108,11 @@ public class historyPage extends JFrame implements ActionListener{
             new Home();
         }
         if(e.getSource() == deleteButton){
-            FileManager.deletetHistory();
+            try {
+                FileManager.deletetHistory();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             JOptionPane.showMessageDialog(null,
                     "Reset successfully", "Notification", JOptionPane.INFORMATION_MESSAGE);
             dispose();

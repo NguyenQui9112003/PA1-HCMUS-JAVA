@@ -112,11 +112,10 @@ public class FileManager {
         Main.listOfSlang = Main.listRawOfSlang;
         System.out.println("Reset success");
     }
-    public static void deletetHistory(){
+    public static void deletetHistory() throws IOException {
         File file = new File("history.txt");
-        if(file.exists()){
-            file.delete();
-        }
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        writer.write("");
         System.out.println("Delete history successfully");
     }
 }

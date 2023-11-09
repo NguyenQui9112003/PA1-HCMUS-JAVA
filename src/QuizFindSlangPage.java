@@ -11,7 +11,7 @@ public class QuizFindSlangPage extends JFrame implements ActionListener {
     public static  int resOfQuestion;
     public QuizFindSlangPage(){
         setTitle("SLANG WORD");
-        setSize(560, 720);
+        setSize(540, 560);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         add(createAndShowGUI());
         setLocationRelativeTo(null);
@@ -23,7 +23,7 @@ public class QuizFindSlangPage extends JFrame implements ActionListener {
         JLabel title = new JLabel("Quiz Game - Slang Word", JLabel.CENTER);
         title.setFont(new Font("Serif", Font.PLAIN, 28));
         title.setForeground(color);
-        title.setBounds(50, 50, 500, 30);
+        title.setBounds(0, 50, 500, 30);
         add(title);
 
         JPanel content = new JPanel();
@@ -35,8 +35,8 @@ public class QuizFindSlangPage extends JFrame implements ActionListener {
         gbc.gridx = 1;
         gbc.gridy = 0;
         question = new JLabel();
-        String x = createSlang(slangSet);
-        question.setText("What is the meaning of " + x + "?");
+        String quest = createSlang(slangSet);
+        question.setText("What is the meaning of " + quest + "?");
         question.setBackground(Color.WHITE);
 
         content.add(question, gbc);
@@ -50,14 +50,18 @@ public class QuizFindSlangPage extends JFrame implements ActionListener {
 
 
         JPanel panel = new JPanel();
-        int panelWidth = 800;
-        int panelHeight = 800;
-        int panelX = (getWidth() - panelWidth) / 2; // Center the panel horizontally.
-        int panelY = title.getY() + title.getHeight() + 25; // Position the panel below the label.
+        int panelWidth = 480;
+        int panelHeight = 560;
+        int panelX = (getWidth() - panelWidth) / 2;
+        int panelY = title.getY() + title.getHeight() + 25;
         panel.setBounds(panelX, panelY, panelWidth, panelHeight);
 
         JPanel quiz = new JPanel();
-        quiz.setLayout(new GridLayout(4, 1));
+        GridLayout layout = new GridLayout(4, 1);
+        layout.setVgap(10);
+        layout.setHgap(10);
+        quiz.setLayout(layout);
+
         res1.addActionListener(this);
         res2.addActionListener(this);
         res3.addActionListener(this);
@@ -96,6 +100,8 @@ public class QuizFindSlangPage extends JFrame implements ActionListener {
             new Home();
         }
         if(e.getSource() == againButton) {
+            setDefaultButton();
+            setLabel();
             dispose();
             new QuizFindSlangPage();
         }
@@ -108,7 +114,7 @@ public class QuizFindSlangPage extends JFrame implements ActionListener {
             res2.setEnabled(false);
             res3.setEnabled(false);
             res4.setEnabled(false);
-        } else if (e.getSource() == res2){
+        } else if (e.getSource() == res2) {
             if(resOfQuestion == 1){
                 JOptionPane.showMessageDialog(null, "Correct answer");
             } else {
@@ -117,7 +123,7 @@ public class QuizFindSlangPage extends JFrame implements ActionListener {
             res1.setEnabled(false);
             res3.setEnabled(false);
             res4.setEnabled(false);
-        } else if (e.getSource() == res3){
+        } else if (e.getSource() == res3) {
             if(resOfQuestion == 2){
                 JOptionPane.showMessageDialog(null, "Correct answer");
             } else {
@@ -126,7 +132,7 @@ public class QuizFindSlangPage extends JFrame implements ActionListener {
             res1.setEnabled(false);
             res2.setEnabled(false);
             res4.setEnabled(false);
-        } else if (e.getSource() == res4){
+        } else if (e.getSource() == res4) {
             if(resOfQuestion == 3){
                 JOptionPane.showMessageDialog(null, "Correct answer");
             } else {
@@ -135,70 +141,59 @@ public class QuizFindSlangPage extends JFrame implements ActionListener {
             res1.setEnabled(false);
             res2.setEnabled(false);
             res3.setEnabled(false);
-        } else if (e.getSource() == againButton){
-            setDefaultButton();
-            setLabel();
         }
+    }
+    public void setDefaultButton(){
+        res1.setEnabled(true); res1.setBackground(Color.white);
+        res2.setEnabled(true); res2.setBackground(Color.white);
+        res3.setEnabled(true); res3.setBackground(Color.white);
+        res4.setEnabled(true); res4.setBackground(Color.white);
+    }
+    public void setLabel(){
+        Set<Object> objectQuestion = createQuestion();
+        ArrayList<String> anwerList = convertArrayString(objectQuestion);
+        String str = createSlang(objectQuestion);
+        question.setText("What is the definition of slang " + str + "? ");
+        res1.setText(anwerList.get(0));
+        res2.setText(anwerList.get(1));
+        res3.setText(anwerList.get(2));
+        res4.setText(anwerList.get(3));
     }
     private Set<Object> createQuestion() {
-        Set<Object> ansObject = new HashSet<>();
-        while(ansObject.size() != 4){
-            String randomAns = Main.listOfSlang.randomSlangWordString();
-            ArrayList<String> A = Main.listOfSlang.getDefinition(randomAns);
-            ansObject.add(A);
+        Set<Object> answerObject = new HashSet<>();
+        while(answerObject.size() < 4){
+            String randomAnswer = Main.listOfSlang.randomSlangWordString();
+            ArrayList<String> A = Main.listOfSlang.getDefinition(randomAnswer);
+            answerObject.add(A);
         }
-        return ansObject;
+        return answerObject;
     }
-
-    public String createSlang(Set<Object> ansObject) {
-        Iterator<Object> k = ansObject.iterator();
+    public String createSlang(Set<Object> answerObject) {
+        int cnt = 0;
+        Iterator<Object> key = answerObject.iterator();
         Random rand = new Random();
         resOfQuestion = rand.nextInt(4);
         System.out.println(resOfQuestion);
-        int count = 0;
-        String slang = null;
-        while (count != 4 && k.hasNext()) {
-            if (resOfQuestion == count) {
-                ArrayList<String> aaa = (ArrayList<String>) k.next();
-                slang = Main.listOfSlang.getSlangWord(aaa);
+        String slangWord = "";
+        while (cnt < 4 && key.hasNext()) {
+            if (resOfQuestion == cnt) {
+                ArrayList<String> listSlangWord = (ArrayList<String>) key.next();
+                slangWord = Main.listOfSlang.getSlangWord(listSlangWord);
                 break;
             }
-            k.next();
-            ++count;
+            key.next();
+            ++cnt;
         }
-        System.out.println("slang: " + slang);
-        return slang;
+        return slangWord;
     }
-
     public ArrayList<String> convertArrayString(Set<Object> ansObject){
-        Iterator<Object> i = ansObject.iterator();
-        ArrayList<String> ansQuestion = new ArrayList<>();
-        while(i.hasNext()){
-            ArrayList<String> b = (ArrayList<String>) i.next();
-            ansQuestion.add(String.join(" , ", b));
+        Iterator<Object> item = ansObject.iterator();
+        ArrayList<String> answerQuestion = new ArrayList<>();
+        while(item.hasNext()){
+            ArrayList<String> str = (ArrayList<String>) item.next();
+            answerQuestion.add(String.join(",", str));
         }
-        return ansQuestion;
-    }
-
-    public void setDefaultButton(){
-        res1.setEnabled(true);
-        res2.setEnabled(true);
-        res3.setEnabled(true);
-        res4.setEnabled(true);
-        res1.setBackground(Color.white);
-        res2.setBackground(Color.white);
-        res3.setBackground(Color.white);
-        res4.setBackground(Color.white);
-    }
-    public void setLabel(){
-        Set<Object> obj = createQuestion();
-        ArrayList<String> listAns = convertArrayString(obj);
-        String x = createSlang(obj);
-        question.setText("What is the definition of slang " + x + "? ");
-        res1.setText(listAns.get(0));
-        res2.setText(listAns.get(1));
-        res3.setText(listAns.get(2));
-        res4.setText(listAns.get(3));
+        return answerQuestion;
     }
 }
 
