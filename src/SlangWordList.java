@@ -79,4 +79,31 @@ public class SlangWordList {
         def.addAll(definition);
         this.listOfSlang.replace(slang, def);
     }
+    public String getSlangWord(ArrayList<String> s){
+        Iterator iter = listOfSlang.entrySet().iterator();
+        while(iter.hasNext()){
+            Map.Entry mapElement = (Map.Entry)iter.next();
+            String slang = (String) mapElement.getKey();
+            List<String> definition = (List<String>) mapElement.getValue();
+            if(definition.equals(s)){
+                return slang;
+            }
+        }
+        return null;
+    }
+    public String randomSlangWordString() {
+        Random r = new Random();
+        String[] keyList = listOfSlang.keySet().toArray(new String[0]);
+        String randomSl = keyList[r.nextInt(listOfSlang.size())];
+        return randomSl;
+    }
+    public ArrayList<String> getDefinition2(String slang){
+        return (ArrayList<String>) listOfSlang.get(slang);
+    }
+    public String randomSlangWord1(){
+        Random r = new Random();
+        String[] keyList = listOfSlang.keySet().toArray(new String[0]);
+        String randomSl = keyList[r.nextInt(listOfSlang.size())];
+        return randomSl;
+    }
 }

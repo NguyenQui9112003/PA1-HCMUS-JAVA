@@ -3,13 +3,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
-
-public class QuizFindSlangPage extends JFrame implements ActionListener {
+public class QuizFindDefPage extends JFrame implements ActionListener{
     private JButton res1, res2, res3, res4;
     private JButton backButton, againButton;
     private JLabel question;
     public static  int resOfQuestion;
-    public QuizFindSlangPage(){
+    public QuizFindDefPage(){
         setTitle("SLANG WORD");
         setSize(560, 720);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -26,6 +25,12 @@ public class QuizFindSlangPage extends JFrame implements ActionListener {
         title.setBounds(50, 50, 500, 30);
         add(title);
 
+        Random ran = new Random();
+        resOfQuestion = ran.nextInt(4);
+        System.out.println(resOfQuestion);
+        Set<Object> obj = createSlang();
+        ArrayList<String> answerList = convertArrayString(obj);
+
         JPanel content = new JPanel();
         content.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -35,13 +40,12 @@ public class QuizFindSlangPage extends JFrame implements ActionListener {
         gbc.gridx = 1;
         gbc.gridy = 0;
         question = new JLabel();
-        String x = createSlang(slangSet);
+        String x = Main.listOfSlang.getDefinitionString(answerList.get(resOfQuestion));
         question.setText("What is the meaning of " + x + "?");
         question.setBackground(Color.WHITE);
 
         content.add(question, gbc);
 
-        ArrayList<String> answerList = convertArrayString(slangSet);
         res1 = new JButton(answerList.get(0));
         res1.setPreferredSize(new Dimension(200, 100));
         res2 = new JButton(answerList.get(1));
@@ -87,8 +91,9 @@ public class QuizFindSlangPage extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new QuizFindSlangPage();
+        new QuizFindDefPage();
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == backButton) {
@@ -97,7 +102,7 @@ public class QuizFindSlangPage extends JFrame implements ActionListener {
         }
         if(e.getSource() == againButton) {
             dispose();
-            new QuizFindSlangPage();
+            new QuizFindDefPage();
         }
         if(e.getSource() == res1){
             if(resOfQuestion == 0){
@@ -140,12 +145,44 @@ public class QuizFindSlangPage extends JFrame implements ActionListener {
             setLabel();
         }
     }
+    public void setDefaultButton(){
+        res1.setEnabled(true);
+        res2.setEnabled(true);
+        res3.setEnabled(true);
+        res4.setEnabled(true);
+        res1.setBackground(Color.white);
+        res2.setBackground(Color.white);
+        res3.setBackground(Color.white);
+        res4.setBackground(Color.white);
+    }
+    public Set<Object> createSlang(){
+        Set<Object> ansObject = new HashSet<>();
+        while(ansObject.size() != 4){
+            String slang = Main.listOfSlang.randomSlangWord1();
+            ansObject.add(slang);
+        }
+        return ansObject;
+    }
+    public void setLabel(){
+        Random ran = new Random();
+        resOfQuestion = ran.nextInt(4);
+        System.out.println(resOfQuestion);
+        Set<Object> obj = createSlang();
+        ArrayList<String> listAns = convertArrayString(obj);
+
+        String x = Main.listOfSlang.getDefinitionString(listAns.get(resOfQuestion));
+        question.setText("What is the definition of slang " + x + "? ");
+        res1.setText(listAns.get(0));
+        res2.setText(listAns.get(1));
+        res3.setText(listAns.get(2));
+        res4.setText(listAns.get(3));
+    }
+
     private Set<Object> createQuestion() {
         Set<Object> ansObject = new HashSet<>();
         while(ansObject.size() != 4){
             String randomAns = Main.listOfSlang.randomSlangWordString();
-            ArrayList<String> A = Main.listOfSlang.getDefinition2(randomAns);
-            ansObject.add(A);
+            ansObject.add(randomAns);
         }
         return ansObject;
     }
@@ -174,34 +211,8 @@ public class QuizFindSlangPage extends JFrame implements ActionListener {
         Iterator<Object> i = ansObject.iterator();
         ArrayList<String> ansQuestion = new ArrayList<>();
         while(i.hasNext()){
-            ArrayList<String> b = (ArrayList<String>) i.next();
-            ansQuestion.add(String.join(" , ", b));
+            ansQuestion.add((String)i.next());
         }
         return ansQuestion;
     }
-
-    public void setDefaultButton(){
-        res1.setEnabled(true);
-        res2.setEnabled(true);
-        res3.setEnabled(true);
-        res4.setEnabled(true);
-        res1.setBackground(Color.white);
-        res2.setBackground(Color.white);
-        res3.setBackground(Color.white);
-        res4.setBackground(Color.white);
-    }
-    public void setLabel(){
-        Set<Object> obj = createQuestion();
-        ArrayList<String> listAns = convertArrayString(obj);
-        String x = createSlang(obj);
-        question.setText("What is the definition of slang " + x + "? ");
-        res1.setText(listAns.get(0));
-        res2.setText(listAns.get(1));
-        res3.setText(listAns.get(2));
-        res4.setText(listAns.get(3));
-    }
 }
-
-
-
-

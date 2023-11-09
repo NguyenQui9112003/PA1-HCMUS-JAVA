@@ -60,6 +60,8 @@ public class Home extends JFrame implements ActionListener {
         updateButton.addActionListener(this);
         resetButton.addActionListener(this);
         deleteButton.addActionListener(this);
+        quizButton.addActionListener(this);
+        quizDefButton.addActionListener(this);
         return panel;
     }
     @Override
@@ -86,6 +88,14 @@ public class Home extends JFrame implements ActionListener {
             this.setVisible(false);
         } else if (e.getSource().equals(deleteButton)) {
             deletePage page = new deletePage();
+            page.setVisible(true);
+            this.setVisible(false);
+        } else if (e.getSource().equals(quizButton)) {
+            QuizFindSlangPage page = new QuizFindSlangPage();
+            page.setVisible(true);
+            this.setVisible(false);
+        } else if (e.getSource().equals(quizDefButton)) {
+            QuizFindDefPage page = new QuizFindDefPage();
             page.setVisible(true);
             this.setVisible(false);
         } else if (e.getSource().equals(resetButton)) {
