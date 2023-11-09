@@ -1,3 +1,7 @@
+package System;
+import ManageFile.*;
+import Model.*;
+import UI.Home;
 import java.util.*;
 public class Main {
     public static SlangWordList listOfSlang;

@@ -6670,7 +6670,7 @@ MIXOLOGY`Study of mixing drinks
 PTE`Private
 PTI`Pardon The Interruption
 SMGDH`Shaking My God Damn Head
-qui`aaaaaaaaa
+qui`aaaaaaaaa|anhyeuem|anhghetem
 PTM`Please Tell Me
 PEACE`Goodbye
 PTL`Praise The Lord

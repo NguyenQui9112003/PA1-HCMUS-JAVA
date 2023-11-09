@@ -1,3 +1,7 @@
+package UI;
+import Model.*;
+import System.*;
+import ManageFile.*;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -5,7 +9,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.table.*;
-import java.util.List;
 public class searchPage extends JFrame implements ActionListener {
     private JTable listTable;
     private JTextField inputField;

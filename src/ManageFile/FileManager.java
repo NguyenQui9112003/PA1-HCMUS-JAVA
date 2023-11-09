@@ -1,5 +1,8 @@
+package ManageFile;
+import Model.*;
 import java.io.*;
 import java.util.*;
+import System.Main;
 //ref: https://github.com/NgocTien0110/Slang-Dictionary/blob/master/src/FileManager.java
 public class FileManager {
     public static String RAW_DATA_DIR = "slang.txt";

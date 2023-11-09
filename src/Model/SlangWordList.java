@@ -1,3 +1,4 @@
+package Model;
 import java.util.*;
 public class SlangWordList {
     private HashMap<String, List<String>> listOfSlang;

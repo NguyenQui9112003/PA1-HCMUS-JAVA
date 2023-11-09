@@ -1,3 +1,7 @@
+package UI;
+import Model.*;
+import System.*;
+import ManageFile.*;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -105,7 +109,7 @@ public class searchDefPage extends JFrame implements ActionListener {
             if(inputString.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Enter string to search");
             } else {
-                ArrayList<String> res = (ArrayList<String>) Main.listOfSlang.searchDefinition(inputString);
+                ArrayList<String> res = Main.listOfSlang.searchDefinition(inputString);
                 if (res == null) {
                     History historyList = new History(time, "NOT FOUND", "NOT FOUND", inputString);
                     FileManager.saveHistory(historyList);

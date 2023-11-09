@@ -1,4 +1,4 @@
-import java.util.*;
+package Model;
 public class History {
     private String time, slang, def, keyword;
     History() { time = ""; slang = ""; def = ""; keyword =""; }

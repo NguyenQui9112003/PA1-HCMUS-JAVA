@@ -1,3 +1,5 @@
+package UI;
+import System.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -36,7 +38,6 @@ public class QuizFindDefPage extends JFrame implements ActionListener{
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 10, 10, 10);
-        Set<Object> slangSet = createQuestion();
         gbc.gridx = 1;
         gbc.gridy = 0;
         question = new JLabel();

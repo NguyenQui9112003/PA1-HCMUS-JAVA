@@ -1,10 +1,11 @@
+package UI;
+import System.*;
+import ManageFile.*;
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import javax.swing.table.*;
 import java.util.Arrays;
 import java.util.List;
 public class addPage extends JFrame implements ActionListener {
@@ -105,6 +106,8 @@ public class addPage extends JFrame implements ActionListener {
                     inputDefField.setText("");
                 } else {
                     new alertScreen(slang, definition);
+                    inputSlangField.setText("");
+                    inputDefField.setText("");
                 }
             }
         }

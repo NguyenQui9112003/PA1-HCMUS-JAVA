@@ -1,9 +1,11 @@
+package UI;
+import System.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
-
+//ref: https://github.com/NgocTien0110/Slang-Dictionary/blob/master/src/GameFindSlangPage.java
 public class QuizFindSlangPage extends JFrame implements ActionListener {
     private JButton res1, res2, res3, res4;
     private JButton backButton, againButton;
@@ -45,8 +47,11 @@ public class QuizFindSlangPage extends JFrame implements ActionListener {
         res1 = new JButton(answerList.get(0));
         res1.setPreferredSize(new Dimension(200, 100));
         res2 = new JButton(answerList.get(1));
+        res2.setPreferredSize(new Dimension(200, 100));
         res3 = new JButton(answerList.get(2));
+        res3.setPreferredSize(new Dimension(200, 100));
         res4 = new JButton(answerList.get(3));
+        res4.setPreferredSize(new Dimension(200, 100));
 
 
         JPanel panel = new JPanel();
@@ -75,13 +80,11 @@ public class QuizFindSlangPage extends JFrame implements ActionListener {
         content.add(quiz, gbc);
 
         backButton = new JButton("Back");
-        gbc.gridx = 1;
         gbc.gridx = 2;
         quiz.add(backButton);
         backButton.addActionListener(this);
 
         againButton = new JButton("Play Again");
-        gbc.gridx = 0;
         gbc.gridx = 2;
         quiz.add(againButton);
         againButton.addActionListener(this);
