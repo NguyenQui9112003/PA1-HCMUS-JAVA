@@ -7,10 +7,9 @@ import java.util.ArrayList;
 import javax.swing.table.*;
 import java.util.List;
 public class searchPage extends JFrame implements ActionListener {
-    private JTextField inputField;
     private JTable listTable;
-    private JButton searchButton;
-    private JButton backButton;
+    private JTextField inputField;
+    private JButton searchButton, backButton;
     public searchPage () {
         setTitle("SLANG WORD");
         setSize(640, 360);
@@ -25,7 +24,7 @@ public class searchPage extends JFrame implements ActionListener {
         JLabel title = new JLabel("Search by Slang Word", JLabel.CENTER);
         title.setFont(new Font("Serif", Font.PLAIN, 28));
         title.setForeground(color);
-        title.setBounds(50, 50, 500, 30);
+        title.setBounds(70, 50, 500, 30);
         add(title);
 
         JPanel panel = new JPanel();
@@ -41,49 +40,55 @@ public class searchPage extends JFrame implements ActionListener {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 10, 10, 10);
 
+        JLabel searchLabel = new JLabel("Search: ");
         gbc.gridx = 0;
         gbc.gridy = 0;
-        JLabel searchLabel = new JLabel("Search: ");
         content.add(searchLabel, gbc);
 
-        gbc.gridx = 1;
-        gbc.gridy = 0;
         inputField = new JTextField();
         inputField.setPreferredSize(new Dimension(240, 25));
+        gbc.gridx = 1;
+        gbc.gridy = 0;
         content.add(inputField, gbc);
 
-        gbc.gridx = 2;
-        gbc.gridy = 0;
         searchButton = new JButton("OK");
         searchButton.setMargin(new Insets(5, 10, 5, 10));
         searchButton.setPreferredSize(new Dimension(50, 25));
         searchButton.addActionListener(this);
+        gbc.gridx = 2;
+        gbc.gridy = 0;
         content.add(searchButton, gbc);
 
         String[] columnNames = {"NO.", "Definition"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 15);
         model.setColumnIdentifiers(columnNames);
+
         listTable = new JTable(model);
         listTable.setPreferredScrollableViewportSize(new Dimension(450, 90));
         listTable.setFillsViewportHeight(true);
+
         JScrollPane scrollPane = new JScrollPane(listTable);
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 2;
         content.add(scrollPane, gbc);
 
+        backButton = new JButton("Back");
+        backButton.addActionListener(this);
         GridBagConstraints backButtonGBC = new GridBagConstraints();
         backButtonGBC.fill = GridBagConstraints.HORIZONTAL;
         backButtonGBC.insets = new Insets(5, 10, 5, 10);
         backButtonGBC.gridx = 0;
         backButtonGBC.gridy = 2;
         backButtonGBC.gridwidth = 2;
-        backButton = new JButton("Back");
-        backButton.addActionListener(this);
         content.add(backButton, backButtonGBC);
 
         panel.add(content);
         return panel;
+    }
+
+    public static void main(String[] args) {
+        new searchPage();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -107,13 +112,13 @@ public class searchPage extends JFrame implements ActionListener {
                     History historyList = new History(time, "NOT FOUND", "NOT FOUND", inputString);
                     FileManager.saveHistory(historyList);
                 } else {
-                    String res = "";
+                    StringBuilder res = new StringBuilder();
                     for (String s : def) {
-                        res += s + ", ";
+                        res.append(s).append(", ");
                     }
-                    History historyList = new History(time, inputString, res, inputString);
+                    History historyList = new History(time, inputString, res.toString(), inputString);
                     FileManager.saveHistory(historyList);
-
+                    //show result
                     DefaultTableModel model = (DefaultTableModel) listTable.getModel();
                     model.setRowCount(0);
                     for (int i = 0; i < def.size(); i++) {

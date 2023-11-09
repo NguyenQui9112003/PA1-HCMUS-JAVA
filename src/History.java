@@ -1,9 +1,6 @@
 import java.util.*;
 public class History {
-    private String time;
-    private String slang;
-    private String def;
-    private String keyword;
+    private String time, slang, def, keyword;
     History() { time = ""; slang = ""; def = ""; keyword =""; }
     public History(String time, String slang, String def, String keyword) {
         this.time = time;

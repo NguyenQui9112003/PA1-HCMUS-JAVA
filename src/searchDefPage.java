@@ -24,7 +24,7 @@ public class searchDefPage extends JFrame implements ActionListener {
         JLabel title = new JLabel("Search by Definition", JLabel.CENTER);
         title.setFont(new Font("Serif", Font.PLAIN, 28));
         title.setForeground(color);
-        title.setBounds(50, 50, 500, 30);
+        title.setBounds(70, 50, 500, 30);
         add(title);
 
         JPanel panel = new JPanel();
@@ -40,23 +40,23 @@ public class searchDefPage extends JFrame implements ActionListener {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 10, 10, 10);
 
-        gbc.gridx = 0;
-        gbc.gridy = 0;
         JLabel searchLabel = new JLabel("Search: ");
         content.add(searchLabel, gbc);
-
-        gbc.gridx = 1;
+        gbc.gridx = 0;
         gbc.gridy = 0;
+
         inputField = new JTextField();
         inputField.setPreferredSize(new Dimension(240, 25));
+        gbc.gridx = 1;
+        gbc.gridy = 0;
         content.add(inputField, gbc);
 
-        gbc.gridx = 2;
-        gbc.gridy = 0;
         searchButton = new JButton("OK");
         searchButton.setMargin(new Insets(5, 10, 5, 10));
         searchButton.setPreferredSize(new Dimension(50, 25));
         searchButton.addActionListener(this);
+        gbc.gridx = 2;
+        gbc.gridy = 0;
         content.add(searchButton, gbc);
 
         String[] columnNames = {"Slang", "Definition"};
@@ -65,24 +65,29 @@ public class searchDefPage extends JFrame implements ActionListener {
         listTable = new JTable(model);
         listTable.setPreferredScrollableViewportSize(new Dimension(450, 90));
         listTable.setFillsViewportHeight(true);
+
         JScrollPane scrollPane = new JScrollPane(listTable);
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 2;
         content.add(scrollPane, gbc);
 
+        backButton = new JButton("Back");
+        backButton.addActionListener(this);
         GridBagConstraints backButtonGBC = new GridBagConstraints();
         backButtonGBC.fill = GridBagConstraints.HORIZONTAL;
         backButtonGBC.insets = new Insets(5, 10, 5, 10);
         backButtonGBC.gridx = 0;
         backButtonGBC.gridy = 2;
         backButtonGBC.gridwidth = 2;
-        backButton = new JButton("Back");
-        backButton.addActionListener(this);
         content.add(backButton, backButtonGBC);
 
         panel.add(content);
         return panel;
+    }
+
+    public static void main(String[] args) {
+        new  searchDefPage();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -108,6 +113,7 @@ public class searchDefPage extends JFrame implements ActionListener {
                 } else {
                     History historyList = new History(time, Main.listOfSlang.getSlangWordList(res), inputString, inputString);
                     FileManager.saveHistory(historyList);
+                    //show result
                     DefaultTableModel model = (DefaultTableModel) listTable.getModel();
                     model.setRowCount(0);
                     for (String re : res) {

@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+//ref: https://github.com/NgocTien0110/Slang-Dictionary/blob/master/src/FileManager.java
 public class FileManager {
     public static String RAW_DATA_DIR = "slang.txt";
     public static String DATA_DIR = "dictionary.txt";
@@ -77,12 +78,12 @@ public class FileManager {
                 Map.Entry<String, List<String>> entry = iterator.next();
                 String slang = entry.getKey();
                 List<String> definition = entry.getValue();
-                String line = slang + "`";
+                StringBuilder line = new StringBuilder(slang + "`");
                 for(String s : definition){
-                    line += s + "|";
+                    line.append(s).append("|");
                 }
-                line = line.substring(0, line.length() - 1);
-                bw.write(line);
+                line = new StringBuilder(line.substring(0, line.length() - 1));
+                bw.write(line.toString());
                 bw.newLine();
             }
             System.out.println("Save file successfully");
@@ -107,16 +108,15 @@ public class FileManager {
             System.out.println("Error: " + e.getMessage());
         }
     }
-
-    public static void resetDictionary(){
+    public static void resetDictionary() {
         Main.listOfSlang = Main.listRawOfSlang;
         System.out.println("Reset success");
     }
-    public static void resetHistory(){
+    public static void deletetHistory(){
         File file = new File("history.txt");
         if(file.exists()){
             file.delete();
         }
-        System.out.println("Reset history successfully");
+        System.out.println("Delete history successfully");
     }
 }

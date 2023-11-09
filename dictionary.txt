@@ -1213,7 +1213,6 @@ DCI`Drum Corps International
 IYSS`If You Say So
 =P`Sticking tongue out
 DCT`Dream Come True
->3`Evil but happy|Hate
 =S`Confused
 PEERS`People in the same group, equals in age, background etc
 TYSM`Thank You So Much
@@ -4455,6 +4454,7 @@ CAKEHOLE`Mouth
 SLFN`So Long For Now
 DAYUM`Damn
 IKHYF`I Know How You Feel
+luomcuy`111111
 KDOT`Okay, period
 IOIC`If Only I Could
 CMYK`Cyan, Magenta, Yellow, Key/blacK
@@ -6669,7 +6669,7 @@ MIXOLOGY`Study of mixing drinks
 PTE`Private
 PTI`Pardon The Interruption
 SMGDH`Shaking My God Damn Head
-qui`wibu
+qui`aaaaaaaaa
 PTM`Please Tell Me
 PEACE`Goodbye
 PTL`Praise The Lord

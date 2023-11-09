@@ -158,7 +158,7 @@ public class QuizFindDefPage extends JFrame implements ActionListener{
     public Set<Object> createSlang(){
         Set<Object> ansObject = new HashSet<>();
         while(ansObject.size() != 4){
-            String slang = Main.listOfSlang.randomSlangWord1();
+            String slang = Main.listOfSlang.randomSlangWordString();
             ansObject.add(slang);
         }
         return ansObject;

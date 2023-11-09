@@ -144,7 +144,7 @@ public class QuizFindSlangPage extends JFrame implements ActionListener {
         Set<Object> ansObject = new HashSet<>();
         while(ansObject.size() != 4){
             String randomAns = Main.listOfSlang.randomSlangWordString();
-            ArrayList<String> A = Main.listOfSlang.getDefinition2(randomAns);
+            ArrayList<String> A = Main.listOfSlang.getDefinition(randomAns);
             ansObject.add(A);
         }
         return ansObject;

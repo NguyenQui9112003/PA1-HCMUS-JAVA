@@ -4,11 +4,10 @@ import java.awt.event.*;
 import javax.swing.table.*;
 public class historyPage extends JFrame implements ActionListener{
     private JTable historyTable;
-    private JButton deleteButton;
-    private JButton backButton;
+    private JButton deleteButton, backButton;
     public historyPage(){
         setTitle("SLANG WORD");
-        setSize(960, 360);
+        setSize(840, 360);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         add(createAndShowGUI());
         setLocationRelativeTo(null);
@@ -20,11 +19,11 @@ public class historyPage extends JFrame implements ActionListener{
         JLabel title = new JLabel("History Search", JLabel.CENTER);
         title.setFont(new Font("Serif", Font.PLAIN, 28));
         title.setForeground(color);
-        title.setBounds(50, 50, 500, 30);
+        title.setBounds(170, 50, 500, 30);
         add(title);
 
         JPanel panel = new JPanel();
-        int panelWidth = 960;
+        int panelWidth = 840;
         int panelHeight = 360;
         int panelX = (getWidth() - panelWidth) / 2;
         int panelY = title.getY() + title.getHeight() + 25;
@@ -59,8 +58,8 @@ public class historyPage extends JFrame implements ActionListener{
 
         slangColumn.setMinWidth(150);
         slangColumn.setMaxWidth(200);
-
         loadTable();
+
         JScrollPane scrollPane = new JScrollPane(historyTable);
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -71,17 +70,17 @@ public class historyPage extends JFrame implements ActionListener{
         optButton.fill = GridBagConstraints.HORIZONTAL;
         optButton.insets = new Insets(5, 10, 5, 10);
 
+        deleteButton = new JButton("Delete");
+        deleteButton.addActionListener(this);
         optButton.gridx = 0;
         optButton.gridy = 1;
         optButton.gridwidth = 1;
-        deleteButton = new JButton("Delete");
-        deleteButton.addActionListener(this);
         content.add(deleteButton, optButton);
 
-        optButton.gridx = 1;
-        optButton.gridy = 1;
         backButton = new JButton("Back");
         backButton.addActionListener(this);
+        optButton.gridx = 1;
+        optButton.gridy = 1;
         content.add(backButton, optButton);
 
         panel.add(content);
@@ -98,6 +97,9 @@ public class historyPage extends JFrame implements ActionListener{
         }
     }
 
+    public static void main(String[] args) {
+        new historyPage();
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == backButton){
@@ -105,7 +107,7 @@ public class historyPage extends JFrame implements ActionListener{
             new Home();
         }
         if(e.getSource() == deleteButton){
-            FileManager.resetHistory();
+            FileManager.deletetHistory();
             JOptionPane.showMessageDialog(null,
                     "Reset successfully", "Notification", JOptionPane.INFORMATION_MESSAGE);
             dispose();

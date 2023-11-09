@@ -10,7 +10,7 @@ public class deletePage extends JFrame implements ActionListener {
     private JTextField inputSlangField;
     public deletePage(){
         setTitle("SLANG WORD");
-        setSize(640, 360);
+        setSize(480, 240);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         add(createAndShowGUI());
         setLocationRelativeTo(null);
@@ -23,12 +23,12 @@ public class deletePage extends JFrame implements ActionListener {
         JLabel title = new JLabel("Delete Slang Word", JLabel.CENTER);
         title.setFont(new Font("Serif", Font.PLAIN, 28));
         title.setForeground(color);
-        title.setBounds(50, 50, 500, 30);
+        title.setBounds(0, 50, 500, 30);
         add(title);
 
         JPanel panel = new JPanel();
-        int panelWidth = 640;
-        int panelHeight = 360;
+        int panelWidth = 480;
+        int panelHeight = 240;
         int panelX = (getWidth() - panelWidth) / 2;
         int panelY = title.getY() + title.getHeight() + 25;
         panel.setBounds(panelX, panelY, panelWidth, panelHeight);
@@ -39,43 +39,42 @@ public class deletePage extends JFrame implements ActionListener {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 10, 10, 10);
 
+        JLabel slangWord = new JLabel("Slang word: ");
         gbc.gridx = 0;
         gbc.gridy = 0;
-        JLabel slangWord = new JLabel("Slang word: ");
         content.add(slangWord, gbc);
 
-        gbc.gridx = 1;
-        gbc.gridy = 0;
         inputSlangField = new JTextField();
         inputSlangField.setPreferredSize(new Dimension(240, 25));
+        gbc.gridx = 1;
+        gbc.gridy = 0;
         content.add(inputSlangField, gbc);
 
-        gbc.gridx = 0;
-        gbc.gridy = 2;
         deleteButton = new JButton("Delete");
         deleteButton.addActionListener(this);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
         content.add(deleteButton, gbc);
 
-        gbc.gridx = 1;
-        gbc.gridy = 2;
         backButton = new JButton("Back");
         backButton.addActionListener(this);
+        gbc.gridx = 1;
+        gbc.gridy = 2;
         content.add(backButton, gbc);
 
         panel.add(content);
         return panel;
     }
-
     public static void main(String[] args) {
         new deletePage();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == backButton){
+        if(e.getSource() == backButton) {
             dispose();
             new Home();
         }
-        if(e.getSource() == deleteButton){
+        if(e.getSource() == deleteButton) {
             String inputSlangString = inputSlangField.getText();
             if(inputSlangString.isEmpty()){
                 JOptionPane.showMessageDialog(null, "Please enter slang word to delete");
@@ -89,6 +88,7 @@ public class deletePage extends JFrame implements ActionListener {
                         Main.listOfSlang.deleteSlangWord(inputSlangString);
                         JOptionPane.showMessageDialog(null, "Delete successfully");
                         FileManager.saveFile();
+                        inputSlangField.setText("");
                     }
                 }
             }
